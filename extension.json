@@ -1,0 +1,50 @@
+{
+	"name": "Accessibility",
+	"version": "0.1.0",
+	"author": [
+		"[http://kwiki.co.il Kwiki]",
+		"[[mw:user:HagaiAsaban|Hagai Asaban]]",
+        "[[mw:user:Yacohen|Yacohen]]"
+	],
+	"url": "doalogue-kwiki/accessibility",
+	"descriptionmsg": "accessibility-desc",
+	"license-name": "GPL v2",
+	"type": "other",
+	"AutoloadClasses": {
+		"AccessibilityHooks": "Accessibility.hooks.php"
+	},
+	"ExtensionMessagesFiles": {
+		"AccessibilityAlias": "Accessibility.i18n.alias.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"AccessibilityHooks::onBeforePageDisplay"
+		]
+	},
+	"MessagesDirs": {
+		"Accessibility": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.accessibility": {
+			"scripts": [
+				"modules/ext.accessibility.js"
+			],
+			"styles": [
+				"modules/ext.accessibility.css"
+			],
+			"messages": [],
+			"dependencies": [
+                "oojs-ui"
+            ]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "Accessibility"
+	},
+	"SpecialPages": {
+	},
+	"manifest_version": 1
+}

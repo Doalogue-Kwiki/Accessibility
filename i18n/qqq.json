@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki",
+			"Umherirrender",
+			"Amire80",
+			"Fhocutt",
+			"Liuxinyu970226"
+		]
+	},
+	"accessibility-desc": "{{desc|name=Accessibility|url=doalogue-kwiki/accessibility }}",
+	"accessibility-i18n-welcome": "Used to greet the user when reading the i18n/??.json file."
+}
