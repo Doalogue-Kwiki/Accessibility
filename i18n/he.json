@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hagai Asaban"
+		]
+	},
+    "accessibility-desc": "הרחבה לתפריט נגישות",
+    "contrast-toggle-popup-text" : "חדות צבעים לטקסטים",	
+    "larger-text-toggle-popup-text" : "הגדל גודל טקסט",
+    "smaller-text-toggle-popup-text" : "הקטן גודל טקסט"
+}
