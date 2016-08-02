@@ -10,6 +10,15 @@
 
 .oo-ui-buttonElement-button {
 	margin-right: 0px !important;
+<<<<<<< HEAD
+=======
+}
+
+div #mw-accessibility-menu {
+    position: fixed;
+    right: 0;
+    top: 50%;
+>>>>>>> 1f1f64a91056f513d07a97f3c0f9972a1f22efb8
 }
 
 div #mw-accessibility-menu {
@@ -22,7 +31,11 @@ div #mw-accessibility-menu {
     margin: 0; 
 }
 #contrast-toggle span.oo-ui-labelElement-label {
+<<<<<<< HEAD
     font-size: 1.7em !important;
+=======
+    font-size: 1.6em !important;
+>>>>>>> 1f1f64a91056f513d07a97f3c0f9972a1f22efb8
 	line-height: 0em !important;
 }
 

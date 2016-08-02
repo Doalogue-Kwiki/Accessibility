@@ -39,7 +39,11 @@
 				resizeTagElementsText(intSize, "a");
 				resizeTagElementsText(intSize, "span");
 				resizeTagElementsText(intSize, "div");	
+<<<<<<< HEAD
 				//resizeTagElementsText(intSize, "nav");
+=======
+				resizeTagElementsText(intSize, "nav");
+>>>>>>> 1f1f64a91056f513d07a97f3c0f9972a1f22efb8
 				resizeTagElementsText(intSize, "input");
 				resizeTagElementsText(intSize, "strong");
 				resizeTagElementsText(intSize, "select");
