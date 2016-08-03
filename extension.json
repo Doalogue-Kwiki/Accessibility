@@ -29,10 +29,12 @@
 	"ResourceModules": {
 		"ext.accessibility": {
 			"scripts": [
-				"modules/rgbcolor.js",
+				"lib/rgbcolor.js",
+                "lib/materialize.min.js",
 				"modules/ext.accessibility.js"
 			],
 			"styles": [
+                "lib/materialize.min.css",
 				"modules/ext.accessibility.css"
 			],
 			"messages": [],
