@@ -5,160 +5,186 @@
     
     function loadAccessibility() {
         
-        mw.loader.using(['oojs-ui']).then(function () {
+		mw.loader.using(['oojs-ui']).then(function () {
+		
+			var $affectedResizeElements = $('*').not('.access-no-resize');
+			var $affectedContrastElements = $('*').not('input');			
+			// Can be extended, ex. $("div, p, span.someClass")
+
+			// Storing the original background color in a data attribute so size can be reset
+			$affectedResizeElements.each( function(){
+				var $this = $(this);
+				$this.data("orig-back-color", $this.css("background-color"));
+			});
 			
-			function resizeElementText(intSize, elementText) {
-				var elementSize = $( elementText ).css( "fontSize" );
-				if (elementSize != "") {					 
-					elementSize = (parseFloat(elementSize) + intSize) + "px";
-					$( elementText ).css( "fontSize", elementSize );
-				}
-				else{
-					$( elementText ).css( "fontSize", "1em" );
-				}
-            }
+			// Storing the original color in a data attribute so size can be reset
+			$affectedResizeElements.each( function(){
+				var $this = $(this);
+				$this.data("orig-color", $this.css("color"));
+			});
 			
-			function resizeTagElementsText(intSize, tagName) {
-				var tagElements = document.getElementsByTagName(tagName);
+			
+			// Storing the original size in a data attribute so size can be reset
+			$affectedResizeElements.each( function(){
+				var $this = $(this);
+				$this.data("orig-size", $this.css("font-size"));
+			});
+
+			function changeFontSize(percent){
+				$affectedResizeElements.each( function(){
+					var $this = $(this);				
+					var currentSize =  parseInt($this.css('font-size')); 
+					var newSize = currentSize * percent;
+					$this.css("font-size" , newSize);				
+				});
+			}
+			
+			function resetFontSize(){
+				$affectedResizeElements.each( function(){
+					var $this = $(this);				
+					$this.css("font-size", $this.data("orig-size"));
+				});
+			}
+			
+			function resetContrastElements(){
+				$affectedResizeElements.each( function() {
+					var $this = $(this);				
+					$this.css("background-color", $this.data("orig-back-color"));
+					$this.css("color", $this.data("orig-color"));
+				});
+			}
+		
+			function changeContrastElements() {
 				
-				for(var i = 0; i < tagElements.length; i++) {				   
-				   resizeElementText(intSize, tagElements[i]);
-				}
-			}
-			
-            function resizeText(intSize) {				
-			
-				resizeElementText(intSize, document.body);
-				resizeTagElementsText(intSize, "h1");
-				resizeTagElementsText(intSize, "h2");
-				resizeTagElementsText(intSize, "h3");
-				resizeTagElementsText(intSize, "h4");
-				resizeTagElementsText(intSize, "h5");
-				resizeTagElementsText(intSize, "h6");
-				resizeTagElementsText(intSize, "p");
-				resizeTagElementsText(intSize, "a");
-				resizeTagElementsText(intSize, "span");
-				resizeTagElementsText(intSize, "div");	 
-				//resizeTagElementsText(intSize, "nav");
-				resizeTagElementsText(intSize, "input");
-				resizeTagElementsText(intSize, "strong");
-				resizeTagElementsText(intSize, "select");
-				resizeTagElementsText(intSize, "tr");
-				resizeTagElementsText(intSize, "td");
-            }
-			
-			function changeColorTagElementsText(color, backgroundColor, tagName) {
-				var tagElements = document.getElementsByTagName(tagName);
+				//set up color properties to iterate through
+				var colorProperties = ['color', 'background-color'];
 
-				for(var i = 0; i < tagElements.length; i++) {
-				   tagElements[i].style.background = backgroundColor;
-				   tagElements[i].style.color = color;
-				}
-			}
-			
-            var contrast_toggle, larger_text_toggle, smaller_text_toggle, buttons_group;
+				//iterate through every element
+				$affectedContrastElements.each(function() {
+					var color = null;
 
-            contrast_toggle = new OO.ui.ToggleButtonWidget(
-            {
-                label: " ◑ ",
+					for (var prop in colorProperties) {
+						prop = colorProperties[prop];
+
+						//if we can't find this property or it's null, continue
+						if (!$(this).css(prop)) continue; 
+
+						//create RGBColor object
+						color = new RGBColor($(this).css(prop));
+
+						if (color.ok) { 
+							$(this).css(prop, 'rgb(' + (255 - color.r) + ', ' 
+													 + (255 - color.g) + ', ' 
+													 + (255 - color.b) + ')');
+						}
+						
+						color = null; //some cleanup
+					}
+				});
+			}	
+			
+			/*function changeColorBlackAndWhite(newColor, newBackgroundColor) {
+				
+				//iterate through every element
+				$affectedContrastElements.each(function() {
+					var $this = $(this);
+					
+					//if we can't find this color property or it's null, continue
+					if ($this.css('color')) {
+						$this.css('color', newColor);
+					}
+					
+					//if we can't find this background color property or it's null, continue
+					if ($this.css('background-color')) {
+						$this.css('background-color', newBackgroundColor);
+					}
+				});
+			}*/
+			
+			//////////////////////////////////////////////////////////////////////////////////////////////
+			
+			var contrast_RGB_toggle = new OO.ui.ToggleButtonWidget( {				
+				label: " 👁 ",
 				//icon: 'halfBright',
+				//title: mw.msg( 'contrast-toggle-popup-text' )
+				id: "contrast-rgb-toggle",               
+				classes: ['ui-accessibility-button', 'access-no-resize', 'access-no-contrast'],  
+				value: false                
+			});
+			
+			/*var contrast_toggle = new OO.ui.ToggleButtonWidget( {
+				label: " ◑ ",				
+				//icon: 'halfBright',
+				//title: mw.msg( 'contrast-toggle-popup-text' )
 				id: "contrast-toggle",               
-                classes: ['ui-accessibility-button'],  
-                value: false,
-                //title: mw.msg( 'contrast-toggle-popup-text' )
-            });
+				classes: ['ui-accessibility-button', 'access-no-resize', 'access-no-contrast'],  
+				value: false                
+			});*/
+			
+			contrast_RGB_toggle.on('click', function () {
+				if(contrast_RGB_toggle.getValue()) {
+					changeContrastElements();
+				}
+				else {
+					resetContrastElements();					
+				}				
+			});
 
-            contrast_toggle.on( 'click', function ()
-            {
-                if(contrast_toggle.getValue())
-                {
-                    document.body.style.background = "#000";
-                    document.body.style.color = "#fff";
-                    document.getElementById("content").style.background = "#000";
-                    changeColorTagElementsText("#fff","#000", "h1");
-					changeColorTagElementsText("#fff","#000", "h2");
-					changeColorTagElementsText("#fff","#000", "h3");
-					changeColorTagElementsText("#fff","#000", "h4");
-					changeColorTagElementsText("#fff","#000", "h5");
-					changeColorTagElementsText("#fff","#000", "h6");
-					changeColorTagElementsText("#fff","#000", "span");
-					changeColorTagElementsText("#fff","#000", "p");
-					changeColorTagElementsText("#fff","#000", "a");
-					changeColorTagElementsText("#fff","#000", "div");
-					changeColorTagElementsText("#fff","#000", "nav");
-					changeColorTagElementsText("#fff","#000", "ul");
-					changeColorTagElementsText("#fff","#000", "li");
-					changeColorTagElementsText("#fff","#000", "input");
-					changeColorTagElementsText("#fff","#000", "select");
-					changeColorTagElementsText("#fff","#000", "button");
-					changeColorTagElementsText("#fff","#000", "strong");
-					changeColorTagElementsText("#fff","#000", "tr");
-					changeColorTagElementsText("#fff","#000", "td");
-                }
-                else
-                {
-                    document.body.style.background = "";
-                    document.body.style.color = "";
-                    document.getElementById("content").style.background = "";
-                    changeColorTagElementsText("","", "h1");
-					changeColorTagElementsText("","", "h2");
-					changeColorTagElementsText("","", "h3");
-					changeColorTagElementsText("","", "h4");
-					changeColorTagElementsText("","", "h5");
-					changeColorTagElementsText("","", "h6");
-					changeColorTagElementsText("","", "span");
-					changeColorTagElementsText("","", "p");
-					changeColorTagElementsText("","", "a");
-					changeColorTagElementsText("","", "div");
-					changeColorTagElementsText("","", "nav");					
-					changeColorTagElementsText("","", "ul");
-					changeColorTagElementsText("","", "li");
-					changeColorTagElementsText("","", "input");
-					changeColorTagElementsText("","", "select");
-					changeColorTagElementsText("","", "button");
-					changeColorTagElementsText("","", "strong");
-					changeColorTagElementsText("","", "tr");
-					changeColorTagElementsText("","", "td");
-                }
-            });
-
-            larger_text_toggle = new OO.ui.ButtonWidget(
-            {
-                label: "A+",
+			/*contrast_toggle.on('click', function () {				
+				if(contrast_toggle.getValue()) {
+					changeColorBlackAndWhite("#fff","#000");
+				}
+				else {
+					changeColorBlackAndWhite("","");					
+				}			
+			});*/
+			
+			var larger_font_size_toggle = new OO.ui.ButtonWidget( {
+				label: "A+",
 				//icon: 'bigger',
-				id: "larger-text-toggle",
-                classes: ['ui-accessibility-button'],                
-                //title: mw.msg( 'larger-text-toggle-popup-text' )
-            });
+				//title: mw.msg( 'larger-text-toggle-popup-text' ),
+				id: "larger-font-toggle",
+				classes: ['ui-accessibility-button', 'access-no-resize', 'access-no-contrast']
+			});
 
-            larger_text_toggle.on( 'click', function ()
-            {
-                resizeText(2);
-            });
+			larger_font_size_toggle.on( 'click', function () {
+				changeFontSize(1.1);
+			});
+			
+			var original_font_size_toggle = new OO.ui.ButtonWidget( {
+				label: "A",
+				//icon: 'bigger',
+				//title: mw.msg( 'larger-text-toggle-popup-text' ),
+				id: "original-font-toggle",
+				classes: ['ui-accessibility-button', 'access-no-resize', 'access-no-contrast']
+			});
 
-            smaller_text_toggle = new OO.ui.ButtonWidget(
-            {
-                label: "A−",
+			original_font_size_toggle.on( 'click', function () {
+				resetFontSize();
+			});
+
+			var smaller_font_size_toggle = new OO.ui.ButtonWidget( {
+				label: "A−",
 				//icon: 'smaller',
-				id: "smaller-text-toggle",
-                classes: ['ui-accessibility-button'],
-                //title: mw.msg( 'smaller-text-toggle-popup-text' )
-            });
+				//title: mw.msg( 'smaller-text-toggle-popup-text' )
+				id: "smaller-font-toggle",
+				classes: ['ui-accessibility-button', 'access-no-resize', 'access-no-contrast']
+			});
 
-            smaller_text_toggle.on( 'click', function ()
-            {
-                resizeText(-2);
-            });
+			smaller_font_size_toggle.on( 'click', function () {
+				changeFontSize(0.90);
+			});
 
-            buttons_group = new OO.ui.ButtonGroupWidget(
-            {
-                id: "mw-accessibility-menu",
-                items: [larger_text_toggle,
-                        smaller_text_toggle,
-                        contrast_toggle]                
-            });
-            
-            $( '#content' ).append( buttons_group.$element);
+			var buttons_group = new OO.ui.ButtonGroupWidget( {
+				id: "mw-accessibility-menu",
+				items: [contrast_RGB_toggle,
+						larger_font_size_toggle,
+						original_font_size_toggle,
+						smaller_font_size_toggle],
+				classes: ['fixed-action-btn horizontal','access-no-resize', 'access-no-contrast']						
+			});
+				
+			$('#content').append( buttons_group.$element);
         });
     }
     

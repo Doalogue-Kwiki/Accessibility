@@ -7,10 +7,10 @@
 .ui-accessibility-button {
     display: block;
 }
-
+/*
 .oo-ui-buttonElement-button {
 	margin-right: 0px !important;
-}
+}*/
 
 div #mw-accessibility-menu {
     position: fixed;
@@ -18,9 +18,12 @@ div #mw-accessibility-menu {
     top: 30%;
     float: left;
 } 
+
 #mw-accessibility-menu a {
     margin: 0; 
+	width: 3em;
 }
+/*
 #contrast-toggle span.oo-ui-labelElement-label {
     font-size: 1.7em !important;
 	line-height: 0em !important;
@@ -34,4 +37,4 @@ div #mw-accessibility-menu {
 #smaller-text-toggle span.oo-ui-labelElement-label {
     font-size: 0.8em !important;
 	line-height: 0em !important;
-}
+}*/

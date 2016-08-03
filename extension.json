@@ -29,6 +29,7 @@
 	"ResourceModules": {
 		"ext.accessibility": {
 			"scripts": [
+				"modules/rgbcolor.js",
 				"modules/ext.accessibility.js"
 			],
 			"styles": [
