@@ -1,11 +1,14 @@
-{
-	"@metadata": {
-		"authors": [
-			"Hagai Asaban"
-		]
-	},
-    "accessibility-desc": "הרחבה לתפריט נגישות",
-    "contrast-toggle-popup-text" : "חדות צבעים לטקסטים",	
-    "larger-text-toggle-popup-text" : "הגדל גודל טקסט",
-    "smaller-text-toggle-popup-text" : "הקטן גודל טקסט"
-}
+	{
+		"@metadata": {
+			"authors": [
+				"Hagai Asaban"
+			]
+		},
+		"accessibility-desc": "הרחבה לתפריט נגישות",
+		"accessibility-menu-popup": "תפריט נגישות",
+		"accessibility-contrast-toggle-popup" : "חדות צבעים בגוונים אפורים",		
+		"accessibility-contrast-rgb-toggle-popup" : "חדות צבעים נגודיים",
+		"accessibility-larger-text-toggle-popup" : "הגדל גודל טקסט",
+		"accessibility-smaller-text-toggle-popup" : "הקטן גודל טקסט",
+		"accessibility-reset-toggle-popup" : "בטל שינויים"
+	}

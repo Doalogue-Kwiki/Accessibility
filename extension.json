@@ -1,12 +1,12 @@
 {
 	"name": "Accessibility",
-	"version": "0.1.0",
+	"version": "0.1.4",
 	"author": [
 		"[http://kwiki.co.il Kwiki]",
 		"[[mw:user:HagaiAsaban|Hagai Asaban]]",
         "[[mw:user:Yacohen|Yacohen]]"
 	],
-	"url": "doalogue-kwiki/accessibility",
+	"url": "doalogue-kwiki/Accessibility",
 	"descriptionmsg": "accessibility-desc",
 	"license-name": "GPL v2",
 	"type": "other",
@@ -27,27 +27,30 @@
 		]
 	},
 	"ResourceModules": {
-		"ext.accessibility": {
+		"ext.Accessibility": {
+			"dependencies": [
+				"ext.MaterialFAB"
+			],
 			"scripts": [
-				"lib/rgbcolor.js",
-                "lib/materialize.min.js",
-				"modules/ext.accessibility.js"
+				"modules/ext.Accessibility.js"
 			],
 			"styles": [
-                "lib/materialize.min.css",
-				"modules/ext.accessibility.css"
+				"modules/ext.Accessibility.css"
 			],
-			"messages": [],
-			"dependencies": [
-                "oojs-ui"
-            ]
+			"messages": [
+				"accessibility-desc",
+				"accessibility-menu-popup",
+				"accessibility-contrast-toggle-popup",		
+				"accessibility-contrast-rgb-toggle-popup",
+				"accessibility-larger-text-toggle-popup",
+				"accessibility-smaller-text-toggle-popup",
+				"accessibility-reset-toggle-popup"
+			]			
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
 		"remoteExtPath": "Accessibility"
-	},
-	"SpecialPages": {
 	},
 	"manifest_version": 1
 }

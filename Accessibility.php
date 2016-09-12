@@ -2,6 +2,7 @@
 
 if ( function_exists( 'wfLoadExtension' ) ) {
 	wfLoadExtension( 'Accessibility' );
+	
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
 	$wgMessagesDirs['Accessibility'] = __DIR__ . '/i18n';
 	

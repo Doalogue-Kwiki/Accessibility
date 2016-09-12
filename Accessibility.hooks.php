@@ -9,7 +9,7 @@
 class AccessibilityHooks {
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin) {
 
-		$out->addModules( array( 'ext.accessibility' ) );
+		$out->addModules( array( 'ext.Accessibility' ) );
 		return true;
 	}
 }

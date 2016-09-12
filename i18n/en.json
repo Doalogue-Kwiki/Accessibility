@@ -5,7 +5,10 @@
 		]
 	},
     "accessibility-desc": "Accessibility Menu Extension",
-    "contrast-toggle-popup-text" : "Contrast text",	
-    "larger-text-toggle-popup-text" : "Make text larger",
-    "smaller-text-toggle-popup-text" : "Make text smaller"
+	"accessibility-menu-popup": "Accessibility Menu",
+    "accessibility-contrast-toggle-popup" : "Grayscale effect",	
+	"accessibility-contrast-rgb-toggle-popup" : "Contrast effect",
+    "accessibility-larger-text-toggle-popup" : "Make text larger",
+    "accessibility-smaller-text-toggle-popup" : "Make text smaller",
+	"accessibility-reset-toggle-popup" : "Reset all changes"
 }
