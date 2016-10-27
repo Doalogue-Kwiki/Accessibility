@@ -27,15 +27,15 @@
 	-ms-filter: invert(1) contrast(1);*/
 }
 
-#md-accessibility .contrast-invert .mfb-component__button--main,
-#md-accessibility .contrast-invert .mfb-component__button--child {
+.contrast-invert .mfb-component__button--main,
+.contrast-invert .mfb-component__button--child {
 	border: solid 2px yellow !important;
 }
 
-#md-accessibility .contrast-invert .mfb-component__button--main:hover, 
-#md-accessibility .contrast-invert .mfb-component__button--main:focus,
-#md-accessibility .contrast-invert .mfb-component__button--child:hover, 
-#md-accessibility .contrast-invert .mfb-component__button--child:focus {
+.contrast-invert .mfb-component__button--main:hover, 
+.contrast-invert .mfb-component__button--main:focus,
+.contrast-invert .mfb-component__button--child:hover, 
+.contrast-invert .mfb-component__button--child:focus {
 	color: white !important;
 	border: solid 3px white !important;
 }
@@ -44,21 +44,7 @@
 #md-accessibility .mfb-component__button--main,
 #md-accessibility .mfb-component__button--child, 
 #md-accessibility .mfb-component__button--child {
-	color: white;
 	border: solid 3px white !important;
-}
-
-#md-accessibility .mfb-component__button--main:hover, 
-#md-accessibility .mfb-component__button--main:focus {
-	color: white;
-	border: solid 3px white !important;
-}
-
-
-#md-accessibility .mfb-component__button--child:hover, 
-#md-accessibility .mfb-component__button--child:focus {
-	color: #274690;
-    border: solid 3px white !important;
 }
 
 .contrast-invert a {
